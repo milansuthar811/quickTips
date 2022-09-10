@@ -1,0 +1,492 @@
+
+sudo apt-get update
+
+sudo apt-get clean
+
+sudo apt-get update
+
+------------------------------------------------------------------------------------
+
+# Install Aptitude
+
+sudo apt-get install aptitude
+
+sudo aptitude purge `dpkg -l | grep php| awk '{print $2}' |tr "\n" " "`
+
+sudo apt-get install python-software-properties
+
+------------------------------------------------------------------------------------
+
+# Install Apache2 and PHP libraries
+
+sudo apt-add-repository ppa:ondrej/php
+
+sudo apt-get update
+
+sudo apt-get install apache2
+
+
+sudo a2enmod proxy_fcgi setenvif
+
+sudo a2enconf php7.3-fpm
+
+sudo service apache2 restart
+sudo apt-get install  php8.1-fpm php8.1-mbstring php8.1-mcrypt php8.1-mysql php8.1-mysqli
+ php8.1-curl php8.1-zip php8.1-imagick php8.1-gd php8.1-xdebug     
+ php8.1-xml php-igbinary php8.1-intl php8.1-ldap php-memcached php8.1-bcmath
+ curl php8.1-mbstring git unzip php-mysql
+
+-----------------------------------------------------------------------------------------
+
+# Install Composer
+
+cd ~/Downloads
+
+curl -sS https://getcomposer.org/installer -o composer-setup.php
+
+sudo php composer-setup.php --install-dir=/usr/local/bin --filename=composer
+
+--------------------------------------------------------------------------------------------
+
+# Install Node
+
+sudo apt-get update
+
+sudo apt-get -y install nodejs
+
+sudo apt-get -y install npm
+
+---------------------------------------------------------------------------------------------
+
+# Install Grunt
+
+sudo npm install --global grunt grunt-cli
+
+-------------------------------------------------------------------------------------------
+
+# Install Java
+
+sudo apt-get remove openjdk*
+
+sudo add-apt-repository ppa:webupd8team/java 
+
+sudo apt-get update     
+
+sudo apt-get install java-common oracle-java8-installer
+
+sudo apt-get install oracle-java8-set-default
+
+source /etc/profile
+
+-------------------------------------------------------------------------------------------
+
+# Install PHPStrome
+
+wget https://download-cf.jetbrains.com/webide/PhpStorm-2016.3.2.tar.gz
+
+sudo tar xvf PhpStorm-2016.3.2.tar.gz
+
+sudo mv PhpStorm-145.1616.3/ /opt/phpstorm/
+
+sudo ln -s /opt/phpstorm/bin/phpstorm.sh /usr/local/bin/phpstorm
+
+----------------------------------------------------------------------------------------------
+
+# SSL Certificate
+
+if not installed run sudo apt-get install openssl
+
+if already install run sudo apt-get upgrade openssl
+
+sudo a2enmod ssl
+
+create directory: sudo mkdir /etc/apache2/ssl
+
+sudo openssl req -x509 -nodes -days 3650 -newkey rsa:2048 -keyout /etc/apache2/ssl/apache.key -out /etc/apache2/ssl/apache.crt 
+
+---------------------------------------------------------------------------------------------------
+
+# Install Memcache
+
+sudo apt-get install php7.3-memcache
+
+sudo apt-get install php7.3-memcached
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+touch ~/Templates/Empty\ Document
+
+sudo apt update
+sudo apt install nginx
+sudo ufw app list
+sudo ufw allow 'Nginx HTTP'
+sudo ufw status
+systemctl status nginx
+sudo systemctl enable nginx
+
+sudo apt-get install vim
+
+sudo apt-get update -y	
+sudo apt-get install -y konsole
+
+
+sudo apt install mysql-server
+sudo systemctl start mysql.service
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'milan@123';
+
+
+sudo apt install git
+
+
+sudo apt-get install  php8.1-fpm php8.1-mcrypt php8.1-mysql php8.1-mysqli
+ php8.1-curl php8.1-zip php8.1-imagick php8.1-gd php8.1-xdebug     
+ php8.1-xml php-igbinary php8.1-intl php8.1-ldap php-memcached php8.1-bcmath
+  curl php8.1-mbstring git unzip php8.1-memcache php8.1-memcached
+  
+  
+sudo chown -c -R $USER:$USER app/
+chmod 777 -R app/storage/
+
+
+
+
+
+
+
+
+
+
+
+
+==============================VS-Code Shorcut==========================
+Alt + click opne class 
+Alt + D + up/down Move current line up/down line
+CTRl + D Duplicate line  
+CTRl + B for close open sidebar 
+customer keyborad config for revela file in sidebar
+Ctrl + Shift + I
+ctrl + `
+ctrl + q locate file on sidebar
+Ctrl + Shift + [ or ]   unfolds fold
+
+
+
+=========================laravel ====================
+composer install will not update anything; it will just install all the dependencies as specified in the composer.lock file
+
+composer update always regenerates composer.lock and installs the lastest versions of available packages based on composer.json
+
+composer dump-autoload won’t download a thing. It just regenerates the list of all classes that need to be included in the project (autoload_classmap.php). Ideal for when you have a new class inside your project
+
+permission to folder and group 
+
+sudo -R milan:milan folderName 
+
+-app/console/kernel-custom cronjob- 
+-app/http/kernel- middlewares 
+-app/provisers/appserviceprovider- boot() method for bootstrapping of app
+
+UserFactory- faker to perform dummy db operations
+
+
+-remove public from URL - copy htaccess from public to main directory and copy server.php to index.php
+
+// Better to protect file using server config in apache config e.g .env
+
+commands:
+php artisan route:list
+
+
+return view('post.index' or 'post/index',['varToAccess'=>$arrayToPass])
+
+
+composer create-project --prefer-dist laravel/laravel blog
+php artisan serve
+change permission sudo chmod -R 770 /var/www/html/blog   sudo chown -R milan:milan /var/www/html/blog
+Into .env file fill the data base vars
+php artisan make:auth
+php artisan migrate
+Naming Your Application :php artisan app:name Horsefly
+
+Generate User Table Seed  : php artisan make:seeder UsersTableSeeder
+
+<?php
+
+use Illuminate\Database\Seeder;
+
+class UsersTableSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run()
+    {
+        factory(App\User::class, 50)->create();
+    }
+}
+
+Add UsersTableSeeder.php seeder to DatabaseSeeder.php
+
+<?php
+use Illuminate\Database\Seeder;
+class DatabaseSeeder extends Seeder
+{
+    /**
+     * Seed the application's database.
+     *
+     * @return void
+     */
+    public function run()
+    {
+        $this->call(UsersTableSeeder::class);
+    }
+}
+
+php artisan db:seed
+
+
+@foreach ():
+@endforeach;
+
+php artisan tinker:Tinker allows you to interact with your entire Laravel application on the command line, including the Eloquent ORM, jobs, events, and more. To enter the Tinker environment.
+
+Route::get('/home',function(){
+return view('home');
+});
+
+OR
+
+Route::view('contact','contact');
+
+
+---------------
+permission to folder and group 
+
+sudo -R milan:milan folderName 
+
+-app/console/kernel-custom cronjob- 
+-app/http/kernel- middlewares 
+-app/provisers/appserviceprovider- boot() method for bootstrapping of app
+
+UserFactory- faker to perform dummy db operations
+
+
+-remove public from URL - copy htaccess from public to main directory and copy server.php to index.php
+
+// Better to protect file using server config in apache config e.g .env
+
+commands:
+php artisan route:list
+
+
+return view('post.index' or 'post/index',['varToAccess'=>$arrayToPass])
+
+
+https://www.digitalocean.com/community/tutorials/how-to-create-a-self-signed-ssl-certificate-for-nginx-in-ubuntu-18-04
+
+php artisan route:cache 
+php artisan cache:clear
+php artisan route:list
+php artisan clear-compile
+php artisan optimize
+sudo chmod -R 770 storage
+sudo chgrp -R www-data storage bootstrap/cache
+sudo chmod -R ug+rwx storage bootstrap/cache
+sudo chmod 775 -R projectname/   
+sudo chown username -R projectname/
+php artisan --version
+npm install if u want to have node and vue
+php artisan migrate --env=local
+php artisan list
+Viewing The Help Screen For A Command  ----    php artisan help migrate
+
+
+  { "keys": ["f6"], "command": "expand_fqcn" },
+  { "keys": ["shift+f6"], "command": "expand_fqcn", "args": {"leading_separator": true} },
+  { "keys": ["f5"], "command": "find_use" },
+  { "keys": ["f4"], "command": "import_namespace" },
+  { "keys": ["f3"], "command": "implement" },
+  { "keys": ["shift+f12"], "command": "goto_definition_scope" },
+  { "keys": ["f7"], "command": "insert_php_constructor_property" }
+  
+key   9868583780-lfhf72svo3i0ebbncj7u2fp2v1dbfref.apps.googleusercontent.com
+secret  aOitqVczz5FQM0DzTalargTw
+
+composer require laravel/ui "^2.0"
+
+## Run multiple versions of PHP 5.6 with 7.0
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+# Step1: Add required dependencies
+
+sudo apt-get install libapache2-mod-fastcgi php5.6-fpm php5.6 php7.0-fpm php7.0
+sudo apt-get install php5.6-mysql php5.6-bcmath php5.6-mbstring php5.6-dom php7.0-mysql php7.0-bcmath php7.0-mbstring php7.0-dom
+
+==================================================================================
+
+# Step2: Check version 
+
+php5.6 --version
+php7.0 --version
+
+==================================================================================
+
+# Step3: Check php5.6 and php7.0-fpm.conf should be available in /etc/apache2/conf-available
+
+==================================================================================
+
+# Step4: Include php5.6-fpm.conf or php7.0-fpm.conf in project virtual host as per project requirements
+
+==================================================================================
+
+# Step5: Restart server and php-fpm 
+
+- Don't forget to restart php-fpm by `sudo php service php-fpm restart`
+- Don't forget to restart server by `sudo php service apache2 restart`
+
+==================================================================================
+
+# Step6: Create symlink for php5.6 & 7.0 command line
+
+ sudo ln -s /usr/bin/php5.6 /usr/bin/php5
+ sudo ln -s /usr/bin/php7.0 /usr/bin/php7
+
+for php5.6 use php5 and php7.0 use php7 command
+==================================================================================
+
+# Step7: Create composer command alias
+
+sudo nano /etc/bash.bashrc
+
+At the end of file, add two commands
+
+ # Alias added locally
+ alias composer5='/usr/bin/php5.6 /usr/local/bin/composer' for php 5.6
+ alias composer7='/usr/bin/php7.0 /usr/local/bin/composer' for php 7.0
+
+for php5.6 use composer5 and php7.0 use composer7 command
+==================================================================================
+
+
+
+in controller  =============
+actionIndex ---> Yii::$app->session->set('et_redirect_to', Yii::$app->request->hostInfo . Url::current());
+actionUpdate-->  $this->redirect(Yii::$app->session->get('et_redirect_to', Url::to(['index'])));
+
+in index.php ---> enablePushState' => true
+
+in form  --> Html::a(FreeswitchClusterModule::t('fscluster', 'cancel'), Yii::$app->session->get('et_redirect_to', Url::to(['index'])),class' =>btn btn-danger btn-round-right']) ?>
+
+Search form -->
+
+<?= Html::a(FreeswitchClusterModule::t('fscluster' .
+'', 'reset'), Url::to(['index']),
+['class' => 'btn btn-danger btn-round-right']); ?>
+
+
+Laravel
+get request->url(), request->path(),request->input(),request->method(),request->isMethod("post|get")
+Route::any->any req.
+
+Linux Commands
+$ su - to become superuser
+ln -s path symbolic link
+/usr/share/nginx/html
+/homw/ntcarfte/ntcarfte-web
+chmod -Rf 770 /path
+chown -Rf nginx:groupname path/
+man //manual 
+ps -aux | grep 8080 //process on port
+
+
+
+
+
+
+
+----------------------------------------------GIT  ----------------------------
+
+The following commands enable color highlighting for Git in the console.
+
+[jerry@CentOS project]$ git config --global color.ui true
+
+[jerry@CentOS project]$ git config --global color.status auto
+
+[jerry@CentOS project]$ git config --global color.branch auto
+
+
+git inti
+git add .
+git commit -m "msg"   oR git add -A && git commit -m "third commit "
+create new repo
+git remote add origin https://MilanSuthar@bitbucket.org/MilanSuthar/blog.git
+or
+git remote add origin  https://github.com/milan378/LaravelDemo.git
+
+git config --global user.email "milansuthar17@yahoo.com" 
+git config --global user.name "Milan"
+
+
+git push -u origin development
+Create a new branch from the master branch : git branch new-branch-name
+
+Remove Local Git Branch: git branch -d branch_name
+
+
+-----------------------------------------------------
+
+install git 
+https://git-scm.com/downloads
+
+
+git add -A(for all files or file name to add to staging area)
+git status
+git remove -A (for all files or file name to remove from staging area)
+first project 
+ create repo.
+ git init 
+ git remote add {alias (origin) } https://github.com/MilanNSuthar/blog.git
+ git pull origin master 
+ git add -A
+ git commit -m "message"
+ git push origin master
+ git remote
+ git branch
+ git status
+ git fetch origin master
+
+ -------------------------------Linux Commands -----------------------------
+ sudo ngrep -d enp2s0 -qW byline port 9002
+ netstat -nap | grep port or service name
+ 
+.htaccess is for apache 
+use traits to avail multiple inhritance in php ( actualy not suppported)
+trait provides implementation while interface just declaration
+grep -R "string to search" /
+
+
+mongo export from mongo admin 
+exec('mongodump --uri ' . $this->mongoTempDbDsn . ' --collection ' . $collection . ' --out ' . $dbDirectory);
+
+mongo restore from mongo admin 
+mongorestore --port 27027 -u "vmdb" -p "bYzgzp9cEH" --db "vmdb" /home/milan/milan/Downloads/5753(2)/db/5753/ntcarfte/
+
+
+===============mount media =================
+mount 172.16.16.169:/non_critical_media /non_critical_media-ceph
+mount 172.16.16.169:/media /media-ceph/
+mount -o hard,nolock usa-node01:/mapr /mapr
+
